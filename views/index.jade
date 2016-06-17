@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div(id="wrapper")
+    div(id="content")
+      h1= title
+      p.small(id="browser")
+      p(id="playertype")
+      div(id="videocontent")
+        video(id="videocontainer", type="application/x-mpegURL", controls="1", style="width: 720px; height: 405px")
+        div(id="events")
+
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+  script(type="text/javascript" src="javascripts/hls.min.js")
+  script(type="text/javascript" src="javascripts/html5-player-events.js")
