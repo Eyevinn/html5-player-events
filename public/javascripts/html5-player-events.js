@@ -99,6 +99,7 @@ function addEvent(type) {
     t: performance.now()
   };
   mediaevents.push(ev);
+  console.log(ev.t + ": " + ev.type);
 }
 
 function playVideo() {
