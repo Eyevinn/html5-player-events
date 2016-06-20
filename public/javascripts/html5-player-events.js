@@ -33,6 +33,7 @@ const EVENTS = [
   'pageshow',
   'popstate',
   'progress',
+  'pause',
   'readystatechange',
   'reset',
   'select',
@@ -61,6 +62,17 @@ const EVENTS = [
   'rejectionhandled'
 ];
 
+const livemanifest = "http://csm-e.cds1.yospace.com/csm/live/119101367.m3u8";
+const vodmanifest = "http://tv4play-i.akamaihd.net/i/mp4root/2016-05-26/pid200012449(3383572_,T3MP445,T3MP435,T3MP425,T3MP415,T3MP48,T3MP43,T3MP4130,).mp4.csmil/master.m3u8";
+
+function playLive() {
+  playVideo(livemanifest);
+}
+
+function playVOD() {
+  playVideo(vodmanifest);
+}
+
 document.addEventListener('DOMContentLoaded', function(ev, data) {
   $('#browser').html(navigator.userAgent.toLowerCase());
 
@@ -73,8 +85,15 @@ document.addEventListener('DOMContentLoaded', function(ev, data) {
     });
     evel.html(html);
   }, 1000);
+  
+  player = document.getElementById('videocontainer');
+  EVENTS.forEach(function(ev) {
+    player.addEventListener(ev.toLowerCase(), function() {
+      addEvent(ev);
+    });
+  });
 
-  playVideo();
+  playVideo(livemanifest);
 });
 
 function isSafari() {
@@ -102,15 +121,11 @@ function addEvent(type) {
   console.log(ev.t + ": " + ev.type);
 }
 
-function playVideo() {
-  player = document.getElementById('videocontainer');
-  var src = "http://csm-e.cds1.yospace.com/csm/live/119101367.m3u8";
+function playVideo(manifesturi) {
+  var src = manifesturi;
+ 
+  mediaevents = [];
 
-  EVENTS.forEach(function(ev) {
-    player.addEventListener(ev.toLowerCase(), function() {
-      addEvent(ev);
-    });
-  });
 
   if(isSafari()) {
     $('#playertype').html("Native player");

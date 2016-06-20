@@ -5,6 +5,9 @@ block content
     div(id="content")
       h1= title
       p.small(id="browser")
+      div
+        button(type="button", onClick="playLive()") Play Live
+        button(type="button", onClick="playVOD()") Play VOD
       p(id="playertype")
       div(id="videocontent")
         video(id="videocontainer", type="application/x-mpegURL", controls="1", style="width: 720px; height: 405px")
